@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lib.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>GANESON WORDS QUIZ</title>
+</head>
+
+<body>
+    <header>
+        <p id="title">GANESON WORDS QUIZ</p>
+        <!-- <p id="version">v1.0</p> -->
+    </header>
+
+    <div id="main">
+        <div class="game visible" id="game-start">
+            <div class="msg">モードを選択して下さい。</div>
+            <div class="button" onclick="start(10, 3)">初級（10問・3拓）</div>
+            <div class="button" onclick="start(20, 4)">中級（20問・4拓）</div>
+            <div class="button" onclick="start(50, 6)">上級（50問・6拓）</div>
+            <div class="button" onclick="start(80, 8)">暇人（80問・8拓）</div>
+        </div>
+        <div class="game" id="game-play">
+            <div id="count"></div>
+            <div id="words"></div>
+            <div id="title-list"></div>
+            <div id="next" onclick="next()"></div>
+        </div>
+        <div class="game" id="game-result">
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div>Copyright © 2020 ganeyuri Inc. All rights reserved.</div>
+    </footer>
+    <script type="text/javascript" src="lib.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

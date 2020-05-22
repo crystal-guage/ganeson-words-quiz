@@ -1,0 +1,179 @@
+* {
+    user-select: none;
+}
+
+body {
+    position: relative;
+    display: block;
+    min-width: 320px;
+    min-height: 680px;
+    background-color: #dde;
+    overflow: auto;
+}
+
+header {
+    display: block;
+    background-color: #eee;
+    width: 100%;
+    height: 60px;
+    border-bottom: solid 1px #aaa;
+}
+
+header>#title {
+    display: inline-block;
+    font-size: 33px;
+    color: #fff;
+    padding-left: 10px;
+    margin-top: 8px;
+    text-shadow: 0px 0px 5px #ffffff ,
+    0px 0px 20px #999,
+    0px 0px 40px #999,
+    0px 0px 60px #999,
+    0px 0px 80px #CCFFCC;
+}
+
+header>#version {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 18px;
+    color: #500;
+    margin-top: 10px;
+}
+
+#main {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    max-width: 640px;
+    width: 640px;
+    min-width: 320px;
+    height: calc(100% - 92px);
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.game {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.msg {
+    display: block;
+    font-size: 25px;
+    margin: 10px auto;
+}
+
+.button {
+    display: block;
+    font-size: 30px;
+    border: solid 1px #f77;
+    background-color: #fef;
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 0 10px 10px;
+}
+.button:hover {
+    background-color: #fff;
+}
+
+#count {
+    display: block;
+    font-size: 45px;
+    text-align: center;
+    color: #668;
+    /* background-color: #eee; */
+}
+
+#words {
+    display: block;
+    margin: 10px auto 0;
+    font-size: 25px;
+    background-color: #fafafa;
+}
+
+
+.title-item {
+    display: block;
+    font-size: 28px;
+    border: solid 1px #aab;
+    color: #557;
+    border-radius: 4px;
+    padding: 0 10px;
+    margin: 10px 10px 0;
+    pointer-events: none;
+    opacity: 1;
+    transition : all 300ms;
+}
+.title-item.select {
+    pointer-events: all;
+    background-color: #eef;
+}
+.title-item.select:hover {
+    background-color: #fff;
+    color: #112;
+}
+
+.title-item.focus {
+    background-color: #fc9;
+}
+.title-item.other {
+    background-color: #fff;
+}
+
+.title-item>div>span.ok {
+    color: #e00;
+}
+.title-item>div>span.ng {
+    color: rgba(0,0,225,0.2);
+}
+
+.param {
+    display: none;
+}
+
+#next {
+    display: block;
+    margin: 20px;
+    font-size: 20px;
+    border: solid 1px #aaa;
+    background-color: #efe;
+    border-radius: 4px;
+    text-align: center;
+    opacity: 0;
+    transition : all 300ms;
+    pointer-events: none;
+}
+
+#next.next-visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#next.next-visible:hover {
+    background-color: #fff;
+}
+
+#result {
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    margin: 50px 0;
+}
+
+
+footer {
+    display: block;
+    background-color: #eee;
+    width: 100%;
+    height: 30px;
+    border-top: solid 1px #aaa;
+    text-align: center;
+}
+
+footer>div {
+    margin-top: 2px;
+    color: #666;
+}
