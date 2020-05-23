@@ -7,6 +7,10 @@ var titleList;
 var total;
 var rate;
 
+var timerId;
+var timer;
+var totalTime;
+
 window.onload = function () {
   init();
 
@@ -17,6 +21,7 @@ window.onload = function () {
 function init() {
   this.questionNum = 0;
   this.correct = 0;
+  this.totalTime = 0;
 }
 
 function start(total, rate) {
@@ -63,25 +68,42 @@ function create() {
             </div>`;
   }
   listForm.innerHTML = html;
+
+  this.timer = 100;
+  this.timerId = setInterval(`showPassage(${ansNum})`, 100)
+}
+
+function showPassage(ansNum) {
+  this.timer--;
+  if (this.timer == 0) {
+    clearInterval(this.timerId);
+    enter(null, ansNum);
+  }
+
+  const timerForm = document.getElementById('timer');
+  timerForm.style.width = `calc(${this.timer}% - 10px)`;
 }
 
 function getRandomWords() {
-  while(true) {
+  while (true) {
     const item = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
     const words = item[1].toLowerCase();
     const title = this.titleList[item[0]].toLowerCase();
-    if(words.indexOf(title) == -1) {
+    if (words.indexOf(title) == -1) {
       return item;
     }
   }
 }
 
 function enter(obj, ansNum) {
+  clearInterval(this.timerId);
   const itemFormList = document.getElementById('title-list').children;
 
-  const selected = obj.children[0].innerHTML;
+  let selected = -1;
+  if (obj != null) selected = obj.children[0].innerHTML;
   if (selected == ansNum) {
-    correct++;
+    this.correct++;
+    this.totalTime += this.timer;
   }
   for (let i = 0; i < itemFormList.length; i++) {
     const item = itemFormList[i];
@@ -121,7 +143,9 @@ function next() {
     document.getElementById('game-result').classList.toggle('visible');
 
     const form = document.getElementById('result');
-    form.innerHTML = `あなたの正解率は${this.correct / this.total * 100}％です。<br>（${this.correct}/${this.total}）`;
+    form.innerHTML = `正解率: ${this.correct / this.total * 100}％
+      （${this.correct}/${this.total}）<br>
+      得点　: ${this.totalTime}`;
   }
 }
 
