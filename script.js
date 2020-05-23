@@ -29,7 +29,7 @@ function create() {
   nextForm.classList.remove('next-visible');
 
   const countForm = document.getElementById('count');
-  countForm.innerHTML = `${questionNum + 1}問目 （トータル${this.total}問）`;
+  countForm.innerHTML = `${questionNum + 1}問目 （全${this.total}問）`;
 
   const wordsItem = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
   const wordsForm = document.getElementById('words');

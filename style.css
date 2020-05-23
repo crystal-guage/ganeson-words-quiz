@@ -45,11 +45,12 @@ header>#version {
     position: relative;
     margin: 0 auto;
     max-width: 640px;
-    width: 640px;
+    width: 100vw;
     min-width: 320px;
     height: calc(100% - 92px);
     background-color: #fff;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .game {
@@ -81,7 +82,7 @@ header>#version {
 
 #count {
     display: block;
-    font-size: 45px;
+    font-size: 35px;
     text-align: center;
     color: #668;
     /* background-color: #eee; */
@@ -89,7 +90,8 @@ header>#version {
 
 #words {
     display: block;
-    margin: 10px auto 0;
+    margin: 10px 0;
+    padding: 5px 5px;
     font-size: 25px;
     background-color: #fafafa;
 }
@@ -97,7 +99,7 @@ header>#version {
 
 .title-item {
     display: block;
-    font-size: 28px;
+    font-size: 24px;
     border: solid 1px #aab;
     color: #557;
     border-radius: 4px;
