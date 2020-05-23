@@ -8,11 +8,15 @@ var total;
 var rate;
 
 window.onload = function () {
-  this.questionNum = 0;
-  this.correct = 0;
+  init();
 
   buildTitle();
   buildWords();
+}
+
+function init() {
+  this.questionNum = 0;
+  this.correct = 0;
 }
 
 function start(total, rate) {
@@ -31,7 +35,7 @@ function create() {
   const countForm = document.getElementById('count');
   countForm.innerHTML = `${questionNum + 1}問目 （全${this.total}問）`;
 
-  const wordsItem = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
+  const wordsItem = getRandomWords();
   const wordsForm = document.getElementById('words');
   wordsForm.innerHTML = wordsItem[1];
 
@@ -61,12 +65,23 @@ function create() {
   listForm.innerHTML = html;
 }
 
+function getRandomWords() {
+  while(true) {
+    const item = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
+    const words = item[1].toLowerCase();
+    const title = this.titleList[item[0]].toLowerCase();
+    if(words.indexOf(title) == -1) {
+      return item;
+    }
+  }
+}
+
 function enter(obj, ansNum) {
   const itemFormList = document.getElementById('title-list').children;
 
   const selected = obj.children[0].innerHTML;
-  if(selected == ansNum) {
-    correct ++;
+  if (selected == ansNum) {
+    correct++;
   }
   for (let i = 0; i < itemFormList.length; i++) {
     const item = itemFormList[i];
@@ -98,7 +113,7 @@ function isEnd() {
 }
 
 function next() {
-  if(!isEnd()) {
+  if (!isEnd()) {
     questionNum++;
     create();
   } else {
@@ -108,6 +123,12 @@ function next() {
     const form = document.getElementById('result');
     form.innerHTML = `あなたの正解率は${this.correct / this.total * 100}％です。<br>（${this.correct}/${this.total}）`;
   }
+}
+
+function toStart() {
+  init();
+  document.getElementById('game-result').classList.toggle('visible');
+  document.getElementById('game-start').classList.toggle('visible');
 }
 
 function buildTitle() {

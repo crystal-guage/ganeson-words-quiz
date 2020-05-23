@@ -64,6 +64,7 @@ header>#version {
 .msg {
     display: block;
     font-size: 25px;
+    padding: 0 5px;
     margin: 10px auto;
 }
 
@@ -85,6 +86,7 @@ header>#version {
     font-size: 35px;
     text-align: center;
     color: #668;
+    margin: 10px 0 0;
     /* background-color: #eee; */
 }
 
@@ -161,8 +163,8 @@ header>#version {
 #result {
     display: block;
     text-align: center;
-    font-size: 40px;
-    margin: 50px 0;
+    font-size: 30px;
+    margin: 20px 0;
 }
 
 
