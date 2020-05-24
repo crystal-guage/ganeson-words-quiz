@@ -3,6 +3,8 @@ var correct;
 
 var wordsList;
 var titleList;
+var targetWordsList;
+var targetTitleList;
 
 var total;
 var rate;
@@ -16,6 +18,18 @@ window.onload = function () {
 
   buildTitle();
   buildWords();
+
+  const list = document.getElementById('game-target').children;
+  for (let i = 1; i < list.length; i++) {
+    const item = list[i];
+    const method = item.getAttribute('onclick');
+    let targetNum = method.replace('target(this, ', '').split(',').length;
+    if (targetNum == 1) {
+      targetNum = 167;
+    }
+    const html = `<span>（${targetNum}曲）</span>`;
+    item.children[0].insertAdjacentHTML('beforeEnd', html);
+  }
 }
 
 function init() {
@@ -24,18 +38,64 @@ function init() {
   this.totalTime = 0;
 }
 
-function start(total, rate) {
+function mode(total, rate) {
   this.total = total;
   this.rate = rate;
-  document.getElementById('game-start').classList.toggle('visible');
-  document.getElementById('game-play').classList.toggle('visible');
+  switchMode('mode', 'target');
+
+  const list = document.getElementById('game-target').children;
+  for (let i = 1; i < list.length; i++) {
+    const item = list[i];
+    const method = item.getAttribute('onclick');
+    let targetNum = method.replace('target(this, ', '').split(',').length;
+    if (targetNum == 1) {
+      targetNum = 167;
+    }
+    if (targetNum < this.rate) {
+      item.classList.add('disable');
+    } else {
+      item.classList.remove('disable');
+    }
+  }
+}
+
+function target(obj, item) {
+  this.target = obj.children[0].innerHTML;
+
+  switchMode('target', 'play');
+
+  if (item == null) {
+    this.targetTitleList = this.titleList;
+    this.targetWordsList = this.wordsList;
+  } else {
+    const list = item.split(',');
+    filterTarget(list);
+  }
   create();
+}
+
+function filterTarget(list) {
+  this.targetTitleList = [];
+  this.targetWordsList = [];
+  for (let i = 0; i < list.length; i++) {
+    const value = Number(list[i]);
+    this.targetTitleList.push(this.titleList[value]);
+    for (let j = 0; j < this.wordsList.length; j++) {
+      const item = this.wordsList[j];
+      if (item[0] == value) {
+        this.targetWordsList.push(item);
+      }
+    }
+  }
 }
 
 function create() {
 
   const nextForm = document.getElementById('next');
   nextForm.classList.remove('next-visible');
+
+  const modeForm = document.getElementById('mode');
+  modeForm.innerHTML = `${this.target}`;
 
   const countForm = document.getElementById('count');
   countForm.innerHTML = `${questionNum + 1}問目 （全${this.total}問）`;
@@ -48,7 +108,12 @@ function create() {
   let html = '';
   const ansNum = Math.floor(Math.random() * this.rate);
   const nameList = [];
-  nameList.push(wordsItem[0]);
+  for (let i = 0; i < this.targetTitleList.length; i++) {
+    const item = this.targetTitleList[i];
+    if (item == this.titleList[wordsItem[0]]) {
+      nameList.push(i);
+    }
+  }
   for (let i = 0; i < this.rate; i++) {
     let item = '-';
     if (i == ansNum) {
@@ -56,11 +121,11 @@ function create() {
     } else {
       let rVal = -1;
       do {
-        rVal = Math.floor(Math.random() * this.titleList.length);
+        rVal = Math.floor(Math.random() * this.targetTitleList.length);
       } while (nameList.includes(rVal));
 
       nameList.push(rVal);
-      item = this.titleList[rVal];
+      item = this.targetTitleList[rVal];
     }
     html += `<div class="title-item select" onclick="enter(this, ${ansNum})">
               <div class="param">${i}</div>
@@ -86,7 +151,7 @@ function showPassage(ansNum) {
 
 function getRandomWords() {
   while (true) {
-    const item = this.wordsList[Math.floor(Math.random() * this.wordsList.length)];
+    const item = this.targetWordsList[Math.floor(Math.random() * this.targetWordsList.length)];
     const words = item[1].toLowerCase();
     const title = this.titleList[item[0]].toLowerCase();
     if (words.indexOf(title) == -1) {
@@ -139,11 +204,13 @@ function next() {
     questionNum++;
     create();
   } else {
-    document.getElementById('game-play').classList.toggle('visible');
-    document.getElementById('game-result').classList.toggle('visible');
+    switchMode('play', 'result');
 
-    const form = document.getElementById('result');
-    form.innerHTML = `正解率: ${this.correct / this.total * 100}％
+    const modeForm = document.getElementById('type');
+    modeForm.innerHTML = `${this.target}`;
+
+    const resultForm = document.getElementById('result');
+    resultForm.innerHTML = `正解率: ${this.correct / this.total * 100}％
       （${this.correct}/${this.total}）<br>
       得点　: ${this.totalTime}`;
   }
@@ -151,8 +218,12 @@ function next() {
 
 function toStart() {
   init();
-  document.getElementById('game-result').classList.toggle('visible');
-  document.getElementById('game-start').classList.toggle('visible');
+  switchMode('result', 'mode');
+}
+
+function switchMode(nowMode, nextMode) {
+  document.getElementById(`game-${nowMode}`).classList.toggle('visible');
+  document.getElementById(`game-${nextMode}`).classList.toggle('visible');
 }
 
 function buildTitle() {

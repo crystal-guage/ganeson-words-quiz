@@ -12,18 +12,37 @@
 <body>
     <header>
         <p id="title">GANESON WORDS QUIZ</p>
-        <p id="version">v1.2</p>
+        <p id="version">v1.3</p>
     </header>
 
     <div id="main">
-        <div class="game visible" id="game-start">
+        <div class="game visible" id="game-mode">
             <div class="msg">モードを選択して下さい。</div>
-            <div class="button" onclick="start(10, 3)">初級（10問・3拓）</div>
-            <div class="button" onclick="start(20, 4)">中級（20問・4拓）</div>
-            <div class="button" onclick="start(50, 6)">上級（50問・6拓）</div>
-            <div class="button" onclick="start(80, 8)">暇人（80問・8拓）</div>
+            <div class="button" onclick="mode(10, 3)">初級（10問・3拓）</div>
+            <div class="button" onclick="mode(20, 4)">中級（20問・4拓）</div>
+            <div class="button" onclick="mode(50, 6)">上級（50問・6拓）</div>
+            <!-- <div class="button" onclick="mode(80, 8)">暇人（80問・8拓）</div> -->
+        </div>
+        <div class="game" id="game-target">
+            <div class="msg">出題対象を選択して下さい。</div>
+            <div class="button" onclick="target(this, null)">
+                <div>全て</div>
+            </div>
+            <div class="button" onclick="target(this, '3,61,114,32,84')">
+                <div>first kaleidscope 〜君の家に着くまでずっと走ってゆく〜</div>
+            </div>
+            <div class="button" onclick="target(this, '138,32,88,114,140,97,137,160,124,115,69,166')">
+                <div>first soundscope 〜水のない晴れた海へ〜</div>
+            </div>
+            <div class="button" onclick="target(this, '150,43,74,122,91,156,62,13,121,123')">
+                <div>SPARKLE 〜筋書き通りのスカイブルー〜</div>
+            </div>
+            <div class="button" onclick="target(this, '37,31,65,86,40,131,82,19,92,23,44')">
+                <div>Crystallize 〜君という光〜</div>
+            </div>
         </div>
         <div class="game" id="game-play">
+            <div id="mode"></div>
             <div id="count"></div>
             <div id="words"></div>
             <div id="timer"></div>
@@ -31,6 +50,7 @@
             <div id="next" onclick="next()"></div>
         </div>
         <div class="game" id="game-result">
+            <div id="type"></div>
             <div id="result"></div>
             <div class="button" onclick="toStart()">トップへ戻る</div>
         </div>

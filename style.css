@@ -10,6 +10,11 @@ body {
     background-color: #dde;
 }
 
+.disable {
+    opacity: 0.4!important;
+    pointer-events: none;
+}
+
 header {
     display: block;
     background-color: #eee;
@@ -48,6 +53,7 @@ header>#version {
     min-width: 320px;
     min-height: calc(100% - 73px);
     background-color: #fff;
+    /* background: linear-gradient(to right,#ffe, #fff,#ffe); */
     border-top: solid 1px #fff;
     overflow-y: auto;
     overflow-x: hidden;
@@ -70,15 +76,29 @@ header>#version {
 
 .button {
     display: block;
-    font-size: 30px;
+    font-size: 26px;
     border: solid 1px #f77;
     background-color: #fef;
     border-radius: 4px;
     padding: 0 10px;
     margin: 0 10px 10px;
 }
+
+.button>div>span {
+    color: #00a;
+}
+
 .button:hover {
     background-color: #fff;
+}
+
+#mode {
+    display: block;
+    font-size: 14px;
+    padding-left: 5px;
+    text-align: left;
+    color: #c50;
+    background-color: #ff6;
 }
 
 #count {
@@ -165,6 +185,15 @@ header>#version {
 
 #next.next-visible:hover {
     background-color: #fff;
+}
+
+#type {
+    display: block;
+    font-size: 18px;
+    padding: 0 5px;
+    text-align: center;
+    color: #00a;
+    /* background-color: #ff6; */
 }
 
 #result {
