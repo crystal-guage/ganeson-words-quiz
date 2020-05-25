@@ -41,7 +41,7 @@ function init() {
 function mode(total, rate) {
   this.total = total;
   this.rate = rate;
-  switchMode('mode', 'target');
+  switchProcess('target');
 
   const list = document.getElementById('game-target').children;
   for (let i = 1; i < list.length; i++) {
@@ -60,9 +60,9 @@ function mode(total, rate) {
 }
 
 function target(obj, item) {
-  this.target = obj.children[0].innerHTML;
+  this.course = obj.children[0].innerHTML;
 
-  switchMode('target', 'play');
+  switchProcess('play');
 
   if (item == null) {
     this.targetTitleList = this.titleList;
@@ -95,7 +95,7 @@ function create() {
   nextForm.classList.remove('next-visible');
 
   const modeForm = document.getElementById('mode');
-  modeForm.innerHTML = `${this.target}`;
+  modeForm.innerHTML = `${this.course}`;
 
   const countForm = document.getElementById('count');
   countForm.innerHTML = `${questionNum + 1}問目 （全${this.total}問）`;
@@ -204,10 +204,10 @@ function next() {
     questionNum++;
     create();
   } else {
-    switchMode('play', 'result');
+    switchProcess('result');
 
     const modeForm = document.getElementById('type');
-    modeForm.innerHTML = `${this.target}`;
+    modeForm.innerHTML = `${this.course}`;
 
     const resultForm = document.getElementById('result');
     resultForm.innerHTML = `正解率: ${this.correct / this.total * 100}％
@@ -218,12 +218,15 @@ function next() {
 
 function toStart() {
   init();
-  switchMode('result', 'mode');
+  switchProcess('mode');
 }
 
-function switchMode(nowMode, nextMode) {
-  document.getElementById(`game-${nowMode}`).classList.toggle('visible');
-  document.getElementById(`game-${nextMode}`).classList.toggle('visible');
+function switchProcess(next) {
+  const list = document.getElementById('main').children;
+  for(let i = 0; i < list.length; i ++) {
+    list[i].classList.remove('visible');
+  }
+  document.getElementById(`game-${next}`).classList.add('visible');
 }
 
 function buildTitle() {
