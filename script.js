@@ -59,6 +59,26 @@ function mode(total, rate) {
   }
 }
 
+
+function headOnly(obj) {
+  this.course = obj.children[0].innerHTML;
+  
+  switchProcess('play');
+
+  this.targetTitleList = this.titleList;
+  this.targetWordsList = [];
+  
+  let prev = -1;
+  for (let i = 0; i < this.wordsList.length; i++) {
+    const item = this.wordsList[i];
+    if (item[0] != prev) {
+      prev = item[0];
+      this.targetWordsList.push(item);
+    }
+  }
+  create();
+}
+
 function target(obj, item) {
   this.course = obj.children[0].innerHTML;
 

@@ -12,7 +12,7 @@
 <body>
     <header>
         <p id="title">GANESON WORDS QUIZ</p>
-        <p id="version">v1.3</p>
+        <p id="version">v1.4</p>
     </header>
 
     <div id="main">
@@ -28,6 +28,9 @@
             <div class="msg">出題対象を選択して下さい。</div>
             <div class="button" onclick="target(this, null)">
                 <div>全て</div>
+            </div>
+            <div class="button" onclick="headOnly(this)">
+                <div>全て（歌い出しのみ）</div>
             </div>
             <div class="button" onclick="target(this, '3,61,114,32,84')">
                 <div>first kaleidscope 〜君の家に着くまでずっと走ってゆく〜</div>
@@ -61,7 +64,7 @@
     </div>
 
     <footer>
-        <div>Copyright © 2020 ganeyuri Inc. All rights reserved.</div>
+        <div>© 2020 ganeyuri inc.</div>
     </footer>
     <script type="text/javascript" src="lib.js"></script>
     <script type="text/javascript" src="script.js"></script>
