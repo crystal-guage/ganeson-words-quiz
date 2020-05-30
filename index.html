@@ -12,12 +12,17 @@
 <body>
     <header>
         <p id="title">GANESON WORDS QUIZ</p>
-        <p id="version">v1.4</p>
+        <p id="version">v1.5</p>
     </header>
 
     <div id="main">
-        <div class="game visible" id="game-mode">
+        <div class="game" id="game-entrance">
             <div class="msg">モードを選択して下さい。</div>
+            <div class="button" onclick="toQuiz()">クイズ</div>
+            <div class="button" onclick="toSearchWors()">歌詞検索</div>
+        </div>
+        <div class="game" id="game-mode">
+            <div class="msg">難易度を選択して下さい。</div>
             <div class="button" onclick="mode(10, 3)">初級（ 10問・3拓）</div>
             <div class="button" onclick="mode(20, 4)">中級（ 20問・4拓）</div>
             <div class="button" onclick="mode(50, 6)">上級（ 50問・6拓）</div>
@@ -61,12 +66,22 @@
             <div id="result"></div>
             <div class="button" onclick="toStart()">トップへ戻る</div>
         </div>
+        <div class="game" id="game-search">
+            <div class="msg">検索対象文字を入力して下さい。</div>
+            <div id="search">
+                <input type="text">
+                <div class="search-btn" onclick="searchWords()">検索</div>
+            </div>
+            <div id="search-result"></div>
+            <div id="search-list"></div>
+        </div>
     </div>
 
     <footer>
         <div>© 2020 ganeyuri inc.</div>
     </footer>
     <script type="text/javascript" src="lib.js"></script>
+    <script type="text/javascript" src="data.js"></script>
     <script type="text/javascript" src="script.js"></script>
 </body>
 
